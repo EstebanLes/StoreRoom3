@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">StoreRoom3</string>
+    <string name="descripcion_img_foto">imgen de la tienda</string>
+    <string name="description_store_add">crear tienda</string>
+    <string name="nombre_de_la_tienda">Nombre de la tienda</string>
+    <string name="save">Save</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_name">Nombre de la Tienda</string>
+    <string name="helper_required">Requerido</string>
+    <string name="hint_phone">telefono</string>
+    <string name="hint_website">URL de sitio web</string>
+    <string name="hint_photo_url">imagen de la url</string>
+    <string name="edit_stor_title_add">Crear Tienda</string>
+    <string name="menu_save">save</string>
+    <string name="edit_store_message_save_success">Tienda agregada correctamente</string>
+</resources>
