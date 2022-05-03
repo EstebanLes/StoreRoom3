@@ -22,4 +22,5 @@
     <string name="dialog_delete_confirm">Eliminar</string>
     <string name="dialog_delete_cancel">Cancelar</string>
     <string name="dialog_options_title">¿Que desea realizar?</string>
+    <string name="main_error_no_sitioweb">Esta tienda No tien un sitioWeb</string>
 </resources>

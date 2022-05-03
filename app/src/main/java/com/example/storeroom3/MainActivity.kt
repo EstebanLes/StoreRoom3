@@ -1,5 +1,7 @@
 package com.example.storeroom3
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -98,22 +100,22 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
 
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.dialog_options_title)
-            .setItems(item) { dialogInterface, i ->
+            .setItems(item) { _, i ->
                 when (i) {
                     0 -> confirmDelete(storeEntity)
-                    1 -> Toast.makeText(this, "Llamar...", Toast.LENGTH_SHORT).show()
-                    2 -> Toast.makeText(this, "Ir al sitio web...", Toast.LENGTH_SHORT).show()
+                    1 -> dial(storeEntity.phone)
+                    2 -> openWeb(storeEntity.website)
                 }
             }
-
             .show()
     }
+
 
     //funsion que se ejecuta cuando se presiona el boton eliminar
     private fun confirmDelete(storeEntity: StoreEntity) {
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.dialog_delete_title)
-            .setPositiveButton(R.string.dialog_delete_confirm) { dialogInterface, i ->
+            .setPositiveButton(R.string.dialog_delete_confirm) { _, _ ->
                 doAsync {
                     StoreApplication.database.storeDao().deleteStore(storeEntity)
                     uiThread {
@@ -122,13 +124,31 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
                 }
 
             }
-            .setNegativeButton(R.string.dialog_delete_cancel) { dialogInterface, i ->
+            .setNegativeButton(R.string.dialog_delete_cancel) { dialogInterface, _ ->
                 dialogInterface.dismiss()
             }
             .show()
     }//end confirmDelete
 
-    /*
+    //funsion que se ejecuta cuando se presiona el boton llamar
+    private fun dial(phone: String) {
+        val callintent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse("tel:$phone")
+        startActivity(callintent)
+    }
+
+    private fun openWeb(website: String) {
+        if (website.isEmpty()) {
+            Toast.makeText(this, R.string.main_error_no_sitioweb, Toast.LENGTH_SHORT).show()
+        } else {
+            val websiteintent = Intent().apply {
+            action = Intent.ACTION_VIEW
+            data = Uri.parse(website)
+        }
+        startActivity(websiteintent)
+    }
+}
+       /*
     * MainAux
     * */
     override fun hideFab(isVisible: Boolean) {
