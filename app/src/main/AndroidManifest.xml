@@ -22,4 +22,17 @@
         </activity>
     </application>
 
+<!--    esta query es para que se pueda acceder a la base de datos de la app-->
+<!--    y le de los permisos del telefono y de internet-->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+            <category android:name="android.intent.category.BROWSABLE" />
+        </intent>
+    </queries>
+
 </manifest>

@@ -23,13 +23,6 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-//        mBinding.btnSave.setOnClickListener{
-//            val store = StoreEntity(name = mBinding.etName.text.toString().trim())
-//
-//            Thread {StoreApplication.database.storeDao().addStore(store)}.start()
-//            mAdapter.add(store)
-//        }
-
         mBinding.fab.setOnClickListener { launchEditFragment() }
 
         setupRecyclerView()
@@ -131,23 +124,33 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
     }//end confirmDelete
 
     //funsion que se ejecuta cuando se presiona el boton llamar
+
     private fun dial(phone: String) {
-        val callintent = Intent(Intent.ACTION_DIAL)
-        intent.data = Uri.parse("tel:$phone")
-        startActivity(callintent)
+        val callIntent = Intent().apply {
+            action = Intent.ACTION_DIAL
+            data = Uri.parse("tel:$phone")
+        }//se hace la verificacion de que el telefono no este vacio mediante la funcion startIntent
+        starIntent(callIntent)
     }
 
     private fun openWeb(website: String) {
         if (website.isEmpty()) {
             Toast.makeText(this, R.string.main_error_no_sitioweb, Toast.LENGTH_SHORT).show()
         } else {
-            val websiteintent = Intent().apply {
+            val websiteIntent = Intent().apply {
             action = Intent.ACTION_VIEW
             data = Uri.parse(website)
         }
-        startActivity(websiteintent)
+          starIntent(websiteIntent)
+        }
     }
-}
+
+    private fun starIntent(intent: Intent) {
+        if (intent.resolveActivity(packageManager) != null) //si hay alguna aplicacion que pueda realizar la llamada
+            startActivity(intent)
+        else
+            Toast.makeText(this, R.string.main_error_no_resolve, Toast.LENGTH_SHORT).show()
+    }
        /*
     * MainAux
     * */

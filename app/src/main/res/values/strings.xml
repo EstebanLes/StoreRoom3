@@ -23,4 +23,5 @@
     <string name="dialog_delete_cancel">Cancelar</string>
     <string name="dialog_options_title">¿Que desea realizar?</string>
     <string name="main_error_no_sitioweb">Esta tienda No tien un sitioWeb</string>
+    <string name="main_error_no_resolve">No se encontro  un nro para llamar o el campo del telefon esta vacio</string>
 </resources>
